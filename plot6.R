@@ -13,7 +13,7 @@ SCC <- readRDS('./data/Source_Classification_Code.rds')
 NEI <- readRDS('./data/summarySCC_PM25.rds')
 
 ##subset data for baltimore
-neiBalLA <- subset(NEI, fips == "24510")
+neiBalLA <- subset(NEI, fips == "24510" | fips == "06037")
 
 #Find motor vehicles information
 #Check if "motor" exists in Short.Name and subset datasets in order to get only coal data

@@ -1,12 +1,12 @@
 {
     "contents" : "##########################################################################################\n## Author:  Pascal Favre\n## Date:    17.09.2014\n## Goal:    Create a plot based on given rds file showing how motor vehicles \n##          sources changed from 1999 to 2008 in Baltimore and Los Angeles\n##########################################################################################\n\n#Activate necessary libraries\nlibrary(ggplot2)\n\n#Read sourcefiles\nSCC <- readRDS('./data/Source_Classification_Code.rds')\nNEI <- readRDS('./data/summarySCC_PM25.rds')\n\n##subset data for baltimore\nneiBalLA <- subset(NEI, fips == \"24510\" | fips == \"06037\")\n\n#Find motor vehicles information\n#Check if \"motor\" exists in Short.Name and subset datasets in order to get only coal data\nmotorRelated <- grep(\"motor\", SCC$Short.Name, ignore.case = T)\nmotorLines <- SCC[motorRelated, ]\nmotorData <- subset(neiBalLA, SCC %in% motorLines$SCC)\n\n#Create a png file\npng(filename=\"./plots/plot6.png\", width=480, height=480, units = \"px\")\n\n#Plot the graph based on ggplot2\nggplot(motorData, aes(year, Emissions, color=fips)) +\n  geom_line(stat=\"summary\", fun.y = \"sum\") +\n  ylab(expression('Total PM'[2.5]*\" Emission\")) +\n  ggtitle(expression(\"Total Emissions from motor vehicles in Baltimore\\n and Los Angeles from 1999 to 2008\"))\n\n#Close printing device\ndev.off()\n",
     "created" : 1411138713872.000,
-    "dirty" : true,
+    "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
     "hash" : "1039121917",
     "id" : "9F40A0F2",
-    "lastKnownWriteTime" : 1411138668,
+    "lastKnownWriteTime" : 1411139041,
     "path" : "~/GitHub/Coursera_EDA_Project2/plot6.R",
     "project_path" : "plot6.R",
     "properties" : {
