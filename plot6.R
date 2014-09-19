@@ -28,7 +28,10 @@ png(filename="./plots/plot6.png", width=480, height=480, units = "px")
 ggplot(motorData, aes(year, Emissions, color=fips)) +
   geom_line(stat="summary", fun.y = "sum") +
   ylab(expression('Total PM'[2.5]*" Emission")) +
-  ggtitle(expression("Total Emissions from motor vehicles in Baltimore\n and Los Angeles from 1999 to 2008"))
+  ggtitle(expression("Total Emissions from motor vehicles in Baltimore\n and Los Angeles from 1999 to 2008"))+
+  scale_color_manual(values = c("blue", "red"),
+                     labels = c("Los Angeles",
+                                "Baltimore"))
 
 #Close printing device
 dev.off()
